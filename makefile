@@ -4,20 +4,30 @@ CXX = g++
 
 #compiler flags:
 CFLAGS = -std=c++11 -g -Wall
+SRC_DIR = ./src
+INCLUDE_DIR = ./include
 
-default: all
+objects = graph.o neural_net.o main.o
 
-all: graph.o neural_net.o  main.o
-	$(CXX) $(CFLAGS) -o all graph.o neural_net.o main.o 
+executable_name = neural_net
 
-graph.o: graph.cpp graph.h
-	$(CXX) $(CFLAGS) -c graph.cpp
+default: neural_net
 
-NeuralNet.o: neural_net.cpp neural_net.h
-	$(CXX) $(CFLAGS) -c NeuralNet.cpp
 
-main.o: main.cpp
-	$(CXX) $(CFLAGS) -c main.cpp
+# all: graph.o neural_net.o  main.o
+# 	$(CXX) $(CFLAGS) -o all graph.o neural_net.o main.o 
+
+all: $(objects)
+	$(CXX) $(CFLAGS) -o all $(objects)
+
+graph.o: ./src/graph.cpp ./include/graph.h
+	$(CXX) $(CFLAGS) -c ./src/graph.cpp
+
+neural_net.o: ./src/neural_net.cpp ./include/neural_net.h
+	$(CXX) $(CFLAGS) -c ./src/neural_net.cpp
+
+main.o: ./src/main.cpp
+	$(CXX) $(CFLAGS) -c ./src/main.cpp
 
 clean:
-	$(RM) *.o
+	rm all $(objects) 
