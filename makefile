@@ -19,6 +19,7 @@ default: neural_net
 
 all: $(objects)
 	$(CXX) $(CFLAGS) -o all $(objects)
+	mkdir -p bin
 	mv all bin/$(executable_name)
 
 graph.o: $(SRC_DIR)graph.cpp $(INCLUDE_DIR)graph.h
